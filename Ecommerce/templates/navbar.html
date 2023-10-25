@@ -1,0 +1,86 @@
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse navbar-fixed-top">
+  <a class="container-fluid" href=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">SHOP</a>
+      </li>
+      <li class="nav-item dropdown {% if 'ekart' is request.path %} active {% endif %}">
+        <a class="nav-link dropdown-toggle" href="{% url 'ekart:allProdCat' %}" role="button" data-toggle="dropdown" aria-expanded="false">
+          ALL PRODUCTS
+        </a>
+          {% for cat in links %}
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a>
+          <div class="dropdown-divider"></div>
+        </div>
+          {% endfor %}
+      </li>
+      <li class="nav-item">
+        <a class="nav-link ">YOUR CART()</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>-->
+
+<!--
+<nav>
+    <ul>
+        <li><a href="">All Products</a> </li>
+
+        <li><a href=""></a> </li>
+
+        <li></li>
+    </ul>
+</nav>-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'ekart:allProdCat' %}">HOME <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">SHOP</a>
+      </li>
+      <li class="nav-item dropdown {% if 'ekart' is request.path %} active {% endif %}">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          ALL PRODUCTS
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'ekart:allProdCat' %}">ALL PRODUCTS</a>
+           {% for cat in links %}
+          <a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a>
+           {% endfor %}
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"></a>
+        </div>
+      </li>
+      {% if item_count > 0 %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'cart:cart_details' %}"><i class="fa-solid fa-cart-plus">({{item_count}})</i></a>
+      </li>
+      {% endif %}
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="{% url 'search_app:Searchdetails' %}" method="get">
+      {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="q" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa-brands fa-searchengin"></i></button>
+    </form>
+  </div>
+</nav>

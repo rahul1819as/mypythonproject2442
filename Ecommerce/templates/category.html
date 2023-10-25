@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {% if category %}
+    {{category.description|truncatewords:155}}
+    {% else %}
+     Everything you are looking for is here.........
+    {% endif %}
+{% endblock %}
+{% block title %}
+    {% if category %}
+    {{category.name}} --EKART
+    {% else %}
+     Go for our exclusive new collections.........
+    {% endif %}
+{% endblock %}
+{% block content %}
+    {% if category %}
+     <div>
+         <div class="row my_row_class">
+             <div class="mx-auto">
+             <p><a href="{% url 'ekart:allProdCat' %}">OUR PRODUCT COLLECTIONS</a> </p>
+             </div>
+         </div>
+     </div>
+     {% endif %}
+<div class="mx-auto">
+    {% if category %}
+        <img class="my_image" src="{{category.image.url}}" alt="{{category.name}}" width="800px" height="600px">
+</div>
+<br>
+<div>
+        <h1 class="text-center my_title">{{category.name}}</h1>
+        <p class="text-justify">{{category.description}}</p>
+</div>
+    {% else %}
+<div>
+        <img class="my_image my_image_padding" src="{% static 'img/ekart.png' %}" alt="our products" height="800px" width="100%">
+</div>
+<br>
+<div>
+    <h1 class="text-center my_title">OUR PRODUCT COLLECTION</h1>
+    <P class="text-justify">But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</P>
+</div>
+     {% endif %}
+<div class="container">
+    <div class="row mx-auto">
+     {% for product in products.object_list %}
+        <div class="my_bottom_margin col-9 col-sm-12 col-md-12 col-md-4 col-lg-4">
+        <div class="card text-center" style="min-width:18rem;">
+        <a href="{{product.get_url}}" ><img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}" width="300px" height="270"></a>
+        </div>
+        <div class="card-body" style="background-color:beige">
+        <h2 class="my_title">{{product.name}}</h2>
+        <p class="text-justify">₹ {{product.price}}/KG</p>
+        </div>
+        </div>
+     {% endfor %}
+    </div>
+    <div>
+        {% if products.paginator.num_pages > 1 %}
+        <hr>
+        <div class="text-center">
+            {% for pg in products.paginator.page_range %}
+             <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+
